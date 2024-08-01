@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>英単語テスト 名詞 意味 Section 1 </title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    #container {
+      border: 1px solid #ddd;
+      padding: 20px;
+      width: 80%;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    #question {
+      margin-bottom: 10px;
+    }
+
+    #answer-area {
+      display: flex;
+      justify-content: center;
+    }
+
+    #answer {
+      width: 50%;
+      padding: 5px;
+    }
+
+    #result {
+      font-weight: bold;
+      color: #000;
+      display: none;
+    }
+
+    #buttons {
+      margin-top: 10px;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+    }
+
+    button {
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+
+    #check-answer {
+      display: block;
+    }
+
+    #next-question {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <h1>英単語テスト 名詞 Section 1</h1>
+    <p id="question"></p>
+    <div id="answer-area">
+      <input type="text" id="answer">
+    </div>
+    <p id="result"></p>
+    <div id="buttons">
+      <button id="check-answer">答えを確認</button>
+      <button id="next-question">次の問題へ</button>
+    </div>
+  </div>
+  <script>
+    const questions = [
+    {
+      "question": "一生、生涯；人生；(日常の)生活；命",
+    "answer": "life"
+  },{
+      "question": "事；物",
+    "answer": "thing"
+  },{
+      "question": "国",
+    "answer": "country"
+  },{
+      "question": "例",
+    "answer": "example"
+  },{
+      "question": "場所、所",
+    "answer": "place"
+  },{
+      "question": "部分",
+    "answer": "part"
+  },{
+      "question": "旅行",
+    "answer": "trip"
+  },{
+      "question": "問題",
+    "answer": "problem"
+  },{
+      "question": "質問",
+    "answer": "question"
+  },{
+      "question": "色",
+    "answer": "color"
+  },{
+      "question": "要点",
+    "answer": "point"
+  },{
+      "question": "言語",
+    "answer": "language"
+  },{
+      "question": "単語、語；言葉",
+    "answer": "word"
+  },{
+      "question": "健康(状態)",
+    "answer": "health"
+  },{
+      "question": "報告(書)、レポート；報道",
+    "answer": "report"
+  },{
+      "question": "(時間の)分；少しの間",
+    "answer": "minute"
+  },{
+      "question": "理由",
+    "answer": "reason"
+  },{
+      "question": "路線；線；列、行列",
+    "answer": "line"
+  },{
+      "question": "(暦の)月",
+    "answer": "month"
+  },{
+      "question": "週",
+    "answer": "week"
+  },{
+      "question": "日にち；デート",
+    "answer": "date"
+  },{
+      "question": "行事；出来事",
+    "answer": "event"
+  },{
+      "question": "未来、将来",
+    "answer": "future"
+  },{
+      "question": "デザイン",
+    "answer": "design"
+  },{
+      "question": "終わり",
+    "answer": "end"
+  },{
+      "question": "コンピューター",
+    "answer": "computer"
+  },{
+      "question": "植物",
+    "answer": "plant"
+  },{
+      "question": "美術；芸術",
+    "answer": "art"
+  },{
+      "question": "機会、好機；可能性；偶然",
+    "answer": "chance"
+  },{
+      "question": "歴史",
+    "answer": "history"
+  },{
+      "question": "祭り",
+    "answer": "festival"
+  },{
+      "question": "季節、時季",
+    "answer": "season"
+  },{
+      "question": "楽しみ",
+    "answer": "fun"
+  },{
+      "question": "(催しなどでもてなす側の)主人、主催者",
+    "answer": "host"
+  },{
+      "question": "伝言、メッセージ",
+    "answer": "message"
+  },{
+      "question": "段階；歩み、一歩；(階段の)段",
+    "answer": "step"
+  }
+
+]
+
+  ;
+    const questionElement = document.getElementById("question");
+    const answerElement = document.getElementById("answer");
+    const resultElement = document.getElementById("result");
+    const checkAnswerButton = document.getElementById("check-answer");
+    const nextQuestionButton = document.getElementById("next-question");
+
+    let usedQuestionIndexes = [];
+
+    function showQuestion() {
+      if (usedQuestionIndexes.length === questions.length) {
+        alert("テスト終了");
+        return;
+      }
+
+      let questionIndex;
+      do {
+        questionIndex = Math.floor(Math.random() * questions.length);
+      } while (usedQuestionIndexes.includes(questionIndex));
+
+      usedQuestionIndexes.push(questionIndex);
+
+      const question = questions[questionIndex];
+      questionElement.textContent = question.question;
+      answerElement.value = "";
+      resultElement.style.display = "none";
+      checkAnswerButton.style.display = "block";
+      nextQuestionButton.style.display = "none";
+    }
+
+    function checkAnswer() {
+      const correctAnswer = questions[usedQuestionIndexes[usedQuestionIndexes.length - 1]].answer;
+      resultElement.textContent = "正解は「" + correctAnswer + "」";
+      resultElement.style.display = "block";
+      checkAnswerButton.style.display = "none";
+      nextQuestionButton.style.display = "block";
+    }
+
+    function nextQuestion() {
+      showQuestion();
+    }
+
+    showQuestion();
+
+    checkAnswerButton.addEventListener("click", checkAnswer);
+    nextQuestionButton.addEventListener("click", nextQuestion);
+  </script>
+</body>
+</html>
